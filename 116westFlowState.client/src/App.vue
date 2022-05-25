@@ -6,7 +6,7 @@
     <router-view />
   </main>
   <footer>
-    <div class="bg-light text-dark text-center p-4">
+    <div class="bg-light text-dark p-4 text-center">
       Made with love, by Haven Fricke 
     </div>
   </footer>

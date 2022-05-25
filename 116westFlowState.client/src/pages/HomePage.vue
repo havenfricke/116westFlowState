@@ -1,7 +1,11 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-
+    <div class="row parallax d-flex justify-content-center">
+      <div class="m-1"></div>
+      <div class="col-lg-5 col-md-8 col-sm-10 text-center text-dark">
+        <h1 class="bg-light p-3 text-center shadow rounded-pill"><div class="mt-2">Weclome to FlowState<h4>A Place for productivity</h4></div></h1>
+      </div>
+    
     </div>
   </div>
 </template>
@@ -13,21 +17,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home{
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-  .home-card{
-    width: 50vw;
-    > img{
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
+.parallax {
+  /* The image used */  
+  background-image: url("../assets/img/3173341.jpg");
+
+  /* Set a specific height */
+  min-height: 100vh;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>
