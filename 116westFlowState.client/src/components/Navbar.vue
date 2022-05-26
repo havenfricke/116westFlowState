@@ -23,9 +23,11 @@
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
-      <Login />
       <Teams /> 
       <Assets />
+      <Sites />
+      <div class="mx-5"></div>
+      <Login />
     </div>
   </nav>
 </template>
