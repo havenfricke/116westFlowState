@@ -24,7 +24,8 @@
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <Login />
-      
+      <Teams /> 
+      <Assets />
     </div>
   </nav>
 </template>
