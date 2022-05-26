@@ -4,7 +4,7 @@
       class="btn selectable text-dark lighten-30 text-uppercase my-2 my-lg-0"
 
     >
-      Login
+      Assets
     </button>
  </span>
 </template>
