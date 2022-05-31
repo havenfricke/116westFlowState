@@ -17,6 +17,11 @@ const routes = [
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
+  },
+  {
+    path: '/teams',
+    name: 'Teams',
+    component: loadPage('TeamsPage'),
   }
 ]
 
