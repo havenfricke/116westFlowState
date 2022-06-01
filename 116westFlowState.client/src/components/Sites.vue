@@ -12,7 +12,6 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { router } from "../router";
 export default {
   setup() {
     const router = useRouter()
