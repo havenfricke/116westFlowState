@@ -1,6 +1,7 @@
 <template>
  <span class="navbar-text">
     <button
+    @click="goTo('Sites')"
       class="btn selectable text-dark lighten-30 text-uppercase my-2 my-lg-0"
     >
       WordPress
@@ -10,13 +11,17 @@
 
 
 <script>
-import { computed } from "@vue/reactivity";
-import { AppState } from "../AppState";
-import { AuthService } from "../services/AuthService";
+import { useRouter } from "vue-router";
+import { router } from "../router";
 export default {
   setup() {
+    const router = useRouter()
     return {
-     
+     goTo(page){
+       router.push({
+         name: page
+       });
+     }
     };
   },
 };
@@ -24,16 +29,5 @@ export default {
 
 
 <style lang="scss" scoped>
-.dropdown-menu {
-  user-select: none;
-  display: block;
-  transform: scale(0);
-  transition: all 0.15s linear;
-}
-.dropdown-menu.show {
-  transform: scale(1);
-}
-.hoverable {
-  cursor: pointer;
-}
+
 </style>
