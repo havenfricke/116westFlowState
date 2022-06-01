@@ -24,7 +24,7 @@
         <br />
         <em class="fs-6">Director of Meow</em>
         <br />
-        <p class="mt-4">
+        <p class="mt-3">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quia
           natus voluptas pariatur obcaecati minus explicabo animi voluptatem a.
           Obcaecati necessitatibus pariatur nihil ipsa aperiam vero corrupti
@@ -70,6 +70,6 @@ export default {
   max-height: 7vh;
 }
 #chatMessage {
-  min-height: 10vh;
+  min-height: 5vh;
 }
 </style>
