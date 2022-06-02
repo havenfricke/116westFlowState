@@ -104,16 +104,17 @@
             type="file"
           ></textarea>
           <div
+            class="rounded"
             id="dropContainer"
-            style="border: 1px solid black; height: 100px"
+            style="border: 1px solid black; height: 50px"
           >
-            Drop Here
+            <h6>File Dropper</h6>
           </div>
-          <div class="d-flex justify-content-end mx-3">
-            <div class="col-2">
+          <div class="d-flex justify-content-end">
+            <div class="col-2 justify-content-end text-end">
               <i
                 style="max-height: 6vh"
-                class="btn rounded bg-primary text-white selectable text-center fs-5 mdi mdi-send me-1 mt-0"
+                class="btn rounded bg-primary text-white selectable text-end fs-5 mdi mdi-send me-1 mt-0"
               ></i>
             </div>
           </div>
