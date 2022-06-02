@@ -91,20 +91,32 @@
         </div>
       </div>
 
-      <div class="col-6 rounded d-flex justify-content-center">
-        <textarea
-          placeholder="type your message here..."
-          style="border: none; max-height: 20vh; min-height: 20vh"
-          name="chatField"
-          id="chatField"
-          cols="890"
-          rows="10"
-        ></textarea>
-        <div class="d-flex justify-content-end mx-3">
-          <i
-            style="max-height: 7vh"
-            class="btn rounded bg-primary text-white selectable text-center fs-4 mdi mdi-send me-1 mt-0"
-          ></i>
+      <div class="col-6 container justify-content-center">
+        <div class="row container">
+          <textarea
+            placeholder="type your message here..."
+            style="border: none; max-height: 20vh; min-height: 20vh"
+            name="chatField"
+            id="chatField"
+            cols="890"
+            rows="10"
+            class="col-12"
+            type="file"
+          ></textarea>
+          <div
+            id="dropContainer"
+            style="border: 1px solid black; height: 100px"
+          >
+            Drop Here
+          </div>
+          <div class="d-flex justify-content-end mx-3">
+            <div class="col-2">
+              <i
+                style="max-height: 6vh"
+                class="btn rounded bg-primary text-white selectable text-center fs-5 mdi mdi-send me-1 mt-0"
+              ></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -146,5 +158,11 @@ export default {
 }
 #chatMessage {
   min-height: 5vh;
+}
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
 }
 </style>
