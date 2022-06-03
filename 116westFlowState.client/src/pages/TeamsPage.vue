@@ -1,7 +1,8 @@
 <template>
   <div class="container-fluid">
     <button
-      class="btn selectable bg-primary mdi text-light mdi-message-outline text-center fs-5 outline px-3 mt-1 ms-1 mt-0 mb-0 ms-0"
+      style="border: none"
+      class="hoverable bg-primary rounded mdi text-light mdi-message-outline text-center fs-5 outline px-3 mt-1 ms-1 mt-0 mb-0 ms-0"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#teamsOffCanvas"
@@ -18,7 +19,7 @@
       </h2>
     </div>
     <div class="row d-flex ms-1 justify-content-center">
-      <!--Implement a search for messages and names - refer to Hatchways assignment-->
+      <!--TODO Implement a search for messages and names - refer to Hatchways assignment-->
       <div
         style="height: 66vh; border: 1px solid #ccc; overflow: auto"
         id="chatMessage"
@@ -94,22 +95,30 @@
 
       <div class="col-6 container justify-content-center">
         <div class="row container">
-          <textarea
-            placeholder="type your message here..."
-            style="border: none; max-height: 20vh; min-height: 20vh"
-            name="chatField"
-            id="chatField"
-            cols="890"
-            rows="10"
-            class="col-12"
-            type="file"
-          ></textarea>
-
+          <form action="">
+            <textarea
+              placeholder="type your message here..."
+              style="border: none; max-height: 20vh; min-height: 20vh"
+              name="chatField"
+              id="chatField"
+              cols="890"
+              rows="10"
+              class="col-12 rounded"
+              type="file"
+            ></textarea>
+            <input
+              style="border: none"
+              class="col-12 bg-grey p-2 rounded"
+              type="file"
+              id="input"
+              multiple
+            />
+          </form>
           <div class="d-flex justify-content-end">
             <div class="col-2 justify-content-end text-end">
               <i
                 style="max-height: 6vh"
-                class="btn rounded bg-primary text-white selectable text-end fs-5 mdi mdi-send me-1 mt-0"
+                class="btn hoverable rounded bg-primary text-white selectable text-end fs-5 mdi mdi-send me-1 mt-2"
               ></i>
             </div>
           </div>
@@ -153,5 +162,15 @@ export default {
 }
 #chatMessage {
   min-height: 5vh;
+}
+.hoverable:hover {
+  transform: scale(1.005);
+  filter: drop-shadow(0px 15px 10px rgba(0, 0, 0, 0.3));
+  transition: 300ms ease-in-out;
+  cursor: pointer;
+}
+.hoverable:active {
+  transform: scale(0.95);
+  transition: 100ms ease-in-out;
 }
 </style>
