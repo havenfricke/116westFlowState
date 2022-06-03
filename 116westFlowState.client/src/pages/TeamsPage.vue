@@ -18,6 +18,7 @@
       </h2>
     </div>
     <div class="row d-flex ms-1 justify-content-center">
+      <!--Implement a search for messages and names - refer to Hatchways assignment-->
       <div
         style="height: 66vh; border: 1px solid #ccc; overflow: auto"
         id="chatMessage"
