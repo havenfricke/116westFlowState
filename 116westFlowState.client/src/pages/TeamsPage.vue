@@ -103,13 +103,7 @@
             class="col-12"
             type="file"
           ></textarea>
-          <div
-            class="rounded"
-            id="dropContainer"
-            style="border: 1px solid black; height: 50px"
-          >
-            <h6>File Dropper</h6>
-          </div>
+
           <div class="d-flex justify-content-end">
             <div class="col-2 justify-content-end text-end">
               <i
@@ -144,7 +138,6 @@
 </template>
 
 <script>
-import Modal from "../components/Modal.vue";
 export default {
   name: "Teams",
   setup() {
@@ -159,11 +152,5 @@ export default {
 }
 #chatMessage {
   min-height: 5vh;
-}
-.box__dragndrop,
-.box__uploading,
-.box__success,
-.box__error {
-  display: none;
 }
 </style>
