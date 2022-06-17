@@ -18,13 +18,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <li>
-       
-        </li>
+        <li></li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
-      <Teams /> 
+      <Teams />
       <Assets />
+      <Vault />
       <Sites />
       <div class="mx-5"></div>
       <Login />
