@@ -44,6 +44,7 @@
             voluptatem a. Obcaecati necessitatibus pariatur nihil ipsa aperiam
             vero corrupti quibusdam? Nisi, eius!
           </p>
+          <i class="mdi mdi-file hoverable"><em> View Attachment(s)</em></i>
         </div>
         <div class="mt-2">
           <img
