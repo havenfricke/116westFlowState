@@ -6,7 +6,14 @@ export class ChatController extends BaseController {
     super('chat')
     this.router
     .use(Auth0Provider.getAuthorizedUserInfo)
-    .get('', )
+    .get('', this.getAllChats)
  }
+    getAllChats(req, res, next) {
+        try {
+            const chats = await 
+        } catch (error) {
+            next(error)
+        }
+    }
 
 }
