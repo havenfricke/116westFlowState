@@ -1,4 +1,5 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
+import { chatService } from "../services/ChatService";
 import BaseController from "../utils/BaseController";
 
 export class ChatController extends BaseController {
@@ -8,9 +9,10 @@ export class ChatController extends BaseController {
     .use(Auth0Provider.getAuthorizedUserInfo)
     .get('', this.getAllChats)
  }
-    getAllChats(req, res, next) {
+    async getAllChats(req, res, next) {
         try {
-            const chats = await 
+            const chats = await chatService.getAllChats(req.query)
+            res.send(chats)
         } catch (error) {
             next(error)
         }
