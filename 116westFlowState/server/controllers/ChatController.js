@@ -1,5 +1,6 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { chatService } from "../services/ChatService";
+import { messageService } from "../services/MessageService";
 import BaseController from "../utils/BaseController";
 
 export class ChatController extends BaseController {
@@ -9,7 +10,11 @@ export class ChatController extends BaseController {
     .use(Auth0Provider.getAuthorizedUserInfo)
     .get('', this.getAllChats)
     .get('/:id', this.getChatById)
+    .get('/:id/messages', this.getChatMessages)
+    .post('', this.createChat)
  }
+   
+   
     async getAllChats(req, res, next) {
         try {
             const chats = await chatService.getAllChats(req.query)
@@ -23,6 +28,26 @@ export class ChatController extends BaseController {
         try {
             req.body.id = req.params.id
             const chat = await chatService.getchatById(req.params.id)
+            res.send(chat)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async getChatMessages(req, res, next) {
+       try {
+        req.body.chatId = req.params.id
+         const messages = await messageService.getChatMessages(req.params.id)
+       } catch (error) {
+        next(error)
+       }
+    }
+
+    async createChat(req, res, next) {
+        try {
+            req.body.creatorId = req.userInfo.id
+            req.body.chatId = req.params.id
+            const chat = await chatService.createChat(req.body)
             res.send(chat)
         } catch (error) {
             next(error)
