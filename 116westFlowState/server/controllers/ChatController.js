@@ -12,7 +12,9 @@ export class ChatController extends BaseController {
     .get('/:id', this.getChatById)
     .get('/:id/messages', this.getChatMessages)
     .post('', this.createChat)
+    .post('/:id/messages', this.createMessage)
  }
+   
    
    
     async getAllChats(req, res, next) {
@@ -38,6 +40,7 @@ export class ChatController extends BaseController {
        try {
         req.body.chatId = req.params.id
          const messages = await messageService.getChatMessages(req.params.id)
+         res.send(messages)
        } catch (error) {
         next(error)
        }
@@ -49,6 +52,17 @@ export class ChatController extends BaseController {
             req.body.chatId = req.params.id
             const chat = await chatService.createChat(req.body)
             res.send(chat)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async createMessage(req, res, next) {
+        try {
+            req.body.creatorId = req.userInfo.id
+            req.body.chatId = req.params.id
+            const message = await messageService.createMessage(req.body)
+            res.send(message)
         } catch (error) {
             next(error)
         }
