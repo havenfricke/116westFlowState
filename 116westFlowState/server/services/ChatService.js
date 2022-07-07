@@ -1,12 +1,22 @@
+import { dbContext } from "../db/DbContext";
+import { NotFound } from "../utils/Errors";
+
 class ChatService{
-    createChat(body) {
-        throw new Error("Method not implemented.");
+    async createChat(body) {
+        const chat = await dbContext.Chats.create(body)
+        await chat.populate('creator')
+        return chat
     }
-    getchatById(id) {
-        throw new Error("Method not implemented.");
+    async getchatById(id) {
+        const chat = await dbContext.Chats.findById(id).populate('creator')
+        if(!chat){
+            throw new NotFound("The chat you are looking for may not be found.")
+        }
+        return chat
     }
     async getAllChats(query = {}) {
-        throw new Error("Method not implemented.");
+        const chats = await dbContext.Chats.find(query)
+        return chats
     }
 
 }
