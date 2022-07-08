@@ -1,9 +1,14 @@
+import { dbContext } from "../db/DbContext";
+
 class MessageService {
-    createMessage(body) {
-        throw new Error("Method not implemented.");
+    async createMessage(body) {
+        const message = await dbContext.Messages.create(body)
+        await message.populate('creator')
+        await message.populate('chat')
     }
-    getChatMessages(id) {
-        throw new Error("Method not implemented.");
+    async getChatMessages(id) {
+        const messages = await dbContext.Messages.find({ chatId: id }).populate('creator').populate('chat');
+        return messages
     }
 
 }
