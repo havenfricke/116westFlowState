@@ -7,6 +7,7 @@ class DbContext {
   Values = mongoose.model('Value', ValueSchema);
   Account = mongoose.model('Account', AccountSchema);
   Chats = mongoose.model('Chat', ChatSchema);
+  Messages = mongoose.model('Message', )
 }
 
 export const dbContext = new DbContext()
