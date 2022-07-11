@@ -23,14 +23,7 @@
           <slot name="modalBody"><!--Body slot--></slot>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <slot name="modalFooter"><!--Footer slow--></slot>
         </div>
       </div>
     </div>

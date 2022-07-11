@@ -18,7 +18,9 @@ async getAllChats() {
 async createChat(body){
     const res = await api.post('api/chat', body)
     logger.log('createChat', res.data)
+    AppState.activeChat = res.data
     AppState.chats = AppState.chats.push(res.data)
+
 }
 }
 

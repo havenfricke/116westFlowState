@@ -59,43 +59,60 @@
       <template #header>
         <h3>
           Chats
-          <button title="add chat" class="btn btn-primary mx-2 rounded">
+          <button
+            title="add chat"
+            class="text-white btn btn-primary mx-2 rounded"
+            data-bs-toggle="modal"
+            data-bs-target="#createChatModal"
+            data-bs-close="teamsOffCanvas"
+          >
             +
           </button>
         </h3>
       </template>
-      <template #body>does it work?</template>
+      <template #body>
+        <div class="p-2 d-flex justify-content-around">
+          <div v-for="c in chats" :key="c.id">
+            <Chat :chat="c" />
+          </div>
+        </div>
+      </template>
     </OffCanvas>
-    <Modal id="teamsModal">
-      <template #modalTitle>Edit Chat</template>
-      <template class="row" #modalBody>
+    <div class="row"></div>
+  </div>
+  <Modal id="createChatModal">
+    <template #modalTitle>Create Chat</template>
+    <template class="row bg-dark" #modalBody>
+      <form @submit.prevent="createChat">
         <div>
           <input
             class="col-12"
             type="text"
             name=""
             id=""
-            placeholder="Edit Name..."
+            placeholder="Name your chat..."
+            v-model="editable.name"
           />
         </div>
-      </template>
-    </Modal>
-    <div class="row"></div>
-  </div>
+        <button class="btn btn-primary text-light">Create</button>
+      </form>
+    </template>
+    <template #modalFooter> </template>
+  </Modal>
 </template>
 
 <script>
 import { AppState } from "../AppState";
-import { messageService } from "../services/MessageService";
 import { chatService } from "../services/ChatService";
 import { computed, ref, watchEffect } from "vue";
 import { logger } from "../utils/Logger";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   name: "Teams",
   setup() {
     const route = useRoute();
+    const router = useRouter();
     const editable = ref({});
     watchEffect(async () => {
       try {
@@ -105,6 +122,18 @@ export default {
       }
     });
     return {
+      editable,
+      async createChat() {
+        try {
+          await chatService.createChat(editable.value);
+          router.push({
+            name: "TeamsChild",
+            params: { id: AppState.activeChat.id },
+          });
+        } catch (error) {
+          logger.error(error);
+        }
+      },
       chats: computed(() => AppState.chats),
     };
   },

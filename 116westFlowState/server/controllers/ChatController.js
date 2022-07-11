@@ -5,12 +5,12 @@ import BaseController from "../utils/BaseController";
 
 export class ChatController extends BaseController {
  constructor(){
-    super('chat')
+    super('api/chat')
     this.router
-    .use(Auth0Provider.getAuthorizedUserInfo)
     .get('', this.getAllChats)
     .get('/:id', this.getChatById)
     .get('/:id/messages', this.getChatMessages)
+    .use(Auth0Provider.getAuthorizedUserInfo)
     .post('', this.createChat)
     .post('/:id/messages', this.createMessage)
  }
@@ -49,7 +49,7 @@ export class ChatController extends BaseController {
     async createChat(req, res, next) {
         try {
             req.body.creatorId = req.userInfo.id
-            req.body.chatId = req.params.id
+            req.body.id = req.params.id
             const chat = await chatService.createChat(req.body)
             res.send(chat)
         } catch (error) {

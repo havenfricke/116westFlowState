@@ -63,7 +63,17 @@
       </div>
     </div>
     <OffCanvas class="bg-dark" id="teamsOffCanvas">
-      <template #header>Teams & Chats</template>
+      <template #header>
+        <h3>
+          Chats
+          <button
+            title="add chat"
+            class="text-white btn btn-primary mx-2 rounded"
+          >
+            +
+          </button>
+        </h3>
+      </template>
       <template #body>does it work?</template>
     </OffCanvas>
     <Modal id="teamsModal">
@@ -93,7 +103,7 @@ import { logger } from "../utils/Logger";
 import { useRoute } from "vue-router";
 
 export default {
-  name: "Teams",
+  name: "TeamsChild",
   setup() {
     const route = useRoute();
     const editable = ref({});

@@ -24,9 +24,14 @@ const routes = [
     component: loadPage('SitePage')
   },
   {
-    path: '/teams',
+    path: '/chat',
     name: 'Teams',
     component: loadPage('TeamsPage'),
+  },
+  {
+    path: '/chat/:id',
+    name: 'TeamsChild',
+    component: loadPage('TeamsPageChild'),
   },
   {
     path: '/assets',
