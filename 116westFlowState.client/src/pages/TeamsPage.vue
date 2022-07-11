@@ -25,72 +25,8 @@
         id="chatMessage"
         class="col-6 bg-light rounded shadow"
       >
-        <div class="mt-2">
-          <img
-            id="profileImg"
-            class="img-fluid object-fit mt-2 rounded-circle"
-            src="https://thiscatdoesnotexist.com"
-            alt=""
-          />
-
-          <br />
-          <b>Kitty cat</b>
-          <br />
-          <em class="fs-6">Director of Meow</em>
-          <br />
-          <p class="mt-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
-            quia natus voluptas pariatur obcaecati minus explicabo animi
-            voluptatem a. Obcaecati necessitatibus pariatur nihil ipsa aperiam
-            vero corrupti quibusdam? Nisi, eius!
-          </p>
-          <i class="mdi mdi-file hoverable"><em> View Attachment(s)</em></i>
-        </div>
-        <div class="mt-2">
-          <img
-            id="profileImg"
-            class="img-fluid object-fit mt-2 rounded-circle"
-            src="https://thiscatdoesnotexist.com"
-            alt=""
-          />
-
-          <br />
-          <b>Kitty cat</b>
-          <br />
-          <em class="fs-6">Director of Meow</em>
-          <br />
-          <p class="mt-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
-            quia natus voluptas pariatur obcaecati minus explicabo animi
-            voluptatem a. Obcaecati necessitatibus pariatur nihil ipsa aperiam
-            vero corrupti quibusdam? Nisi, eius! Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Qui sit nemo alias rerum facere quasi,
-            fugit ipsam laboriosam totam facilis vitae esse aperiam velit quis
-            magni eligendi, est accusantium inventore!
-          </p>
-        </div>
-        <div class="mt-2">
-          <img
-            id="profileImg"
-            class="img-fluid object-fit mt-2 rounded-circle"
-            src="https://thiscatdoesnotexist.com"
-            alt=""
-          />
-
-          <br />
-          <b>Kitty cat</b>
-          <br />
-          <em class="fs-6">Director of Meow</em>
-          <br />
-          <p class="mt-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
-            quia natus voluptas pariatur obcaecati minus explicabo animi
-            voluptatem a. Obcaecati necessitatibus pariatur nihil ipsa aperiam
-            vero corrupti quibusdam? Nisi, eius! Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Qui sit nemo alias rerum facere quasi,
-            fugit ipsam laboriosam totam facilis vitae esse aperiam velit quis
-            magni eligendi, est accusantium inventore!
-          </p>
+        <div v-for="m in messages" :key="m.id" class="mt-2">
+          <Message :message="m" />
         </div>
       </div>
 
@@ -99,7 +35,7 @@
           <form action="">
             <textarea
               placeholder="type your message here..."
-              style="border: none; max-height: 20vh; min-height: 20vh"
+              style="border: none; max-height: 25vh; min-height: 20vh"
               name="chatField"
               id="chatField"
               cols="890"
@@ -149,10 +85,29 @@
 </template>
 
 <script>
+import { AppState } from "../AppState";
+import { messageService } from "../services/MessageService";
+import { chatService } from "../services/ChatService";
+import { computed, ref, watchEffect } from "vue";
+import { logger } from "../utils/Logger";
+import { useRoute } from "vue-router";
+
 export default {
   name: "Teams",
   setup() {
-    return {};
+    const route = useRoute();
+    const editable = ref({});
+    watchEffect(async () => {
+      try {
+        await chatService.getChatById(route.params.id);
+        await messageService.getMessagesByChat(route.params.id);
+      } catch (error) {
+        logger.error(error);
+      }
+    });
+    return {
+      message: computed(() => AppState.messages),
+    };
   },
 };
 </script>
