@@ -20,9 +20,9 @@
             :src="account.picture"
             alt="account photo"
             height="40"
-            class="rounded"
+            class="rounded-circle"
           />
-          <span class="mx-3 text-success lighten-30">{{ account.name }}</span>
+          <span class="mx-3 text-dark lighten-30">{{ account.name }}</span>
         </div>
       </div>
       <div
@@ -46,7 +46,6 @@
   </span>
 </template>
 
-
 <script>
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState";
@@ -66,7 +65,6 @@ export default {
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
 .dropdown-menu {
