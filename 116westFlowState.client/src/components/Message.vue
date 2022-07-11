@@ -21,6 +21,12 @@
 </template>
 <script>
 export default {
+  props: {
+    message: {
+      type: Object,
+      required: true,
+    },
+  },
   setup() {
     return {};
   },

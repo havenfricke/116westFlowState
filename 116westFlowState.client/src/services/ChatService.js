@@ -4,13 +4,13 @@ import { api } from "./AxiosService"
 
 class ChatService{
 async getChatById(id){
-    const res = await api.get('api/offers/' + id)
+    const res = await api.get('api/chat/' + id)
     logger.log('getchatbyid', res.data)
     AppState.activechat = res.data 
 }
 
 async getAllChats() {
-    const res = await api.get('api/offers')
+    const res = await api.get('api/chat')
     logger.log('getallchats', res.data)
     AppState.chats = res.data
 }

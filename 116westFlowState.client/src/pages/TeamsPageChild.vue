@@ -8,18 +8,25 @@
       data-bs-target="#teamsOffCanvas"
       aria-controls="teamsOffCanvas"
     ></button>
-    <div></div>
-    <div class="row mt-2 d-flex ms-1 justify-content-center">
+    <div>
+      <h2 class="text-end border-bottom border-dark mx-3">
+        <i
+          class="mdi text-center fs-4 px-2 selectable rounded-circle mdi-pencil"
+          data-bs-toggle="modal"
+          data-bs-target="#teamsModal"
+        ></i
+        >The Cat Club
+      </h2>
+    </div>
+    <div class="row d-flex ms-1 justify-content-center">
       <!--TODO Implement a search for messages and names - refer to Hatchways assignment-->
       <div
         style="height: 66vh; border: 1px solid #ccc; overflow: auto"
         id="chatMessage"
         class="col-6 bg-light rounded shadow"
       >
-        <div class="mt-5">
-          <h3 class="text-center mt-5">
-            Select a chat or create one to get started
-          </h3>
+        <div v-for="m in messages" :key="m.id" class="mt-2">
+          <Message :message="m" />
         </div>
       </div>
 
@@ -56,14 +63,7 @@
       </div>
     </div>
     <OffCanvas class="bg-dark" id="teamsOffCanvas">
-      <template #header>
-        <h3>
-          Chats
-          <button title="add chat" class="btn btn-primary mx-2 rounded">
-            +
-          </button>
-        </h3>
-      </template>
+      <template #header>Teams & Chats</template>
       <template #body>does it work?</template>
     </OffCanvas>
     <Modal id="teamsModal">
@@ -99,13 +99,14 @@ export default {
     const editable = ref({});
     watchEffect(async () => {
       try {
-        await chatService.getAllChats();
+        await chatService.getChatById(route.params.id);
+        await messageService.getMessagesByChat(route.params.id);
       } catch (error) {
         logger.error(error);
       }
     });
     return {
-      chats: computed(() => AppState.chats),
+      message: computed(() => AppState.messages),
     };
   },
 };
