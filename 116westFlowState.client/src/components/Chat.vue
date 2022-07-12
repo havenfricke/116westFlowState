@@ -10,6 +10,7 @@
 import { useRouter } from "vue-router";
 import { AppState } from "../AppState";
 import { chatService } from "../services/ChatService";
+import { messageService } from "../services/MessageService";
 
 export default {
   props: {
@@ -23,6 +24,7 @@ export default {
     return {
       async goTo(chatId) {
         await chatService.getChatById(chatId);
+        await messageService.getMessagesByChat(chatId);
         router.push({
           name: "TeamsChild",
           params: { id: chatId },

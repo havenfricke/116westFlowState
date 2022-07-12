@@ -32,7 +32,7 @@
 
       <div class="col-6 container justify-content-center">
         <div class="row container">
-          <form action="">
+          <form @submit.prevent="createMessage">
             <textarea
               placeholder="type your message here..."
               style="border: none; max-height: 25vh; min-height: 20vh"
@@ -50,15 +50,14 @@
               id="input"
               multiple
             />
-          </form>
-          <div class="d-flex justify-content-end">
-            <div class="col-2 justify-content-end text-end">
-              <i
-                style="max-height: 6vh"
-                class="btn hoverable rounded bg-primary text-white selectable text-end fs-5 mdi mdi-send me-1 mt-2"
-              ></i>
+            <div class="d-flex justify-content-end">
+              <button
+                class="col-2 mb-5 text-center btn hoverable rounded bg-primary text-white selectable fs-5 mdi mdi-send me-1 mt-2"
+              >
+                <i style="max-height: 6vh" class=""></i>
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -135,6 +134,7 @@ export default {
   setup() {
     const route = useRoute();
     const editable = ref({});
+    const editable2 = ref({});
     const router = useRouter();
     watchEffect(async () => {
       try {
@@ -147,6 +147,7 @@ export default {
     });
     return {
       editable,
+      editable2,
       async createChat() {
         try {
           await chatService.createChat(editable.value);
@@ -155,6 +156,13 @@ export default {
             name: "TeamsChild",
             params: { id: AppState.activeChat.id },
           });
+        } catch (error) {
+          logger.error(error);
+        }
+      },
+      async createMessage() {
+        try {
+          await messageService.createMessage(editable2.value, route.params.id);
         } catch (error) {
           logger.error(error);
         }
