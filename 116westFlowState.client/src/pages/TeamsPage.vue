@@ -126,6 +126,7 @@ export default {
       async createChat() {
         try {
           await chatService.createChat(editable.value);
+          await chatService.getAllChats();
           router.push({
             name: "TeamsChild",
             params: { id: AppState.activeChat.id },

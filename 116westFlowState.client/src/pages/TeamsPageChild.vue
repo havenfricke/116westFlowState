@@ -8,14 +8,14 @@
       data-bs-target="#teamsOffCanvas"
       aria-controls="teamsOffCanvas"
     ></button>
-    <div>
-      <h2 class="text-end border-bottom border-dark mx-3">
+    <div class="row">
+      <h2 class="text-end px-5 col-12 border-bottom border-dark mx-3">
         <i
           class="mdi text-center fs-4 px-2 selectable rounded-circle mdi-pencil"
           data-bs-toggle="modal"
           data-bs-target="#teamsModal"
         ></i
-        >The Cat Club
+        >{{ activeChat.name }}
       </h2>
     </div>
     <div class="row d-flex ms-1 justify-content-center">
@@ -69,13 +69,41 @@
           <button
             title="add chat"
             class="text-white btn btn-primary mx-2 rounded"
+            data-bs-toggle="modal"
+            data-bs-target="#createChatChildModal"
+            data-bs-close="teamsOffCanvas"
           >
             +
           </button>
         </h3>
       </template>
-      <template #body>does it work?</template>
+      <template #body>
+        <div class="p-2 d-flex justify-content-around">
+          <div v-for="c in chats" :key="c.id">
+            <Chat :chat="c" />
+          </div>
+        </div>
+      </template>
     </OffCanvas>
+    <Modal id="createChatChildModal">
+      <template #modalTitle>Create Chat</template>
+      <template class="row bg-dark" #modalBody>
+        <form @submit.prevent="createChat">
+          <div>
+            <input
+              class="col-12"
+              type="text"
+              name=""
+              id=""
+              placeholder="Name your chat..."
+              v-model="editable.name"
+            />
+          </div>
+          <button class="btn btn-primary text-light">Create</button>
+        </form>
+      </template>
+      <template #modalFooter></template>
+    </Modal>
     <Modal id="teamsModal">
       <template #modalTitle>Edit Chat</template>
       <template class="row" #modalBody>
@@ -100,23 +128,40 @@ import { messageService } from "../services/MessageService";
 import { chatService } from "../services/ChatService";
 import { computed, ref, watchEffect } from "vue";
 import { logger } from "../utils/Logger";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   name: "TeamsChild",
   setup() {
     const route = useRoute();
     const editable = ref({});
+    const router = useRouter();
     watchEffect(async () => {
       try {
         await chatService.getChatById(route.params.id);
         await messageService.getMessagesByChat(route.params.id);
+        await chatService.getAllChats();
       } catch (error) {
         logger.error(error);
       }
     });
     return {
+      editable,
+      async createChat() {
+        try {
+          await chatService.createChat(editable.value);
+          await chatService.getAllChats();
+          router.push({
+            name: "TeamsChild",
+            params: { id: AppState.activeChat.id },
+          });
+        } catch (error) {
+          logger.error(error);
+        }
+      },
+      chats: computed(() => AppState.chats),
       message: computed(() => AppState.messages),
+      activeChat: computed(() => AppState.activeChat),
     };
   },
 };
@@ -138,5 +183,8 @@ export default {
 .hoverable:active {
   transform: scale(0.95);
   transition: 100ms ease-in-out;
+}
+div {
+  overflow: hidden;
 }
 </style>

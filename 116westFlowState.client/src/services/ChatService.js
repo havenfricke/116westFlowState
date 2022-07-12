@@ -2,11 +2,11 @@ import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
-class ChatService{
+class ChatService {
 async getChatById(id){
     const res = await api.get('api/chat/' + id)
     logger.log('getchatbyid', res.data)
-    AppState.activechat = res.data 
+    AppState.activeChat = res.data 
 }
 
 async getAllChats() {

@@ -1,9 +1,16 @@
-<template lang="">
-  <button class="text-white btn btn-primary hoverable mx-2 rounded">
+<template>
+  <button
+    @click="goTo(chat.id)"
+    class="text-white btn btn-primary hoverable mx-2 rounded"
+  >
     {{ chat.name }}
   </button>
 </template>
 <script>
+import { useRouter } from "vue-router";
+import { AppState } from "../AppState";
+import { chatService } from "../services/ChatService";
+
 export default {
   props: {
     chat: {
@@ -12,7 +19,16 @@ export default {
     },
   },
   setup() {
-    return {};
+    const router = useRouter();
+    return {
+      async goTo(chatId) {
+        await chatService.getChatById(chatId);
+        router.push({
+          name: "TeamsChild",
+          params: { id: chatId },
+        });
+      },
+    };
   },
 };
 </script>
